@@ -1,4 +1,6 @@
 from ast import Delete
+from email.policy import default
+from django.forms import HiddenInput
 from rest_framework import serializers
 from .models import *
 
@@ -6,9 +8,11 @@ from .models import *
 
 
 class WomenSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+
     class Meta:
         model = Women
-        fields = ('__all__')
+        fields = '__all__'
 
 #     title = serializers.CharField(max_length=255)
 #     content = serializers.CharField()
